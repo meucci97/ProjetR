@@ -9,14 +9,18 @@ library(shiny)
 
 shinyServer(function(input, output) {
 
-  output$distPlot <- renderPlot({
+  output$binomPlot <- renderPlot({
 
-    # generate bins based on input$bins from ui.R
-    x    <- faithful[, 2]
-    bins <- seq(min(x), max(x), length.out = input$bins + 1)
+    p  <- dbinom(0:input$nBin, input$nBin, input$pBin)
 
-    # draw the histogram with the specified number of bins
-    hist(x, breaks = bins, col = 'darkgray', border = 'white')
+    plot(0:input$nBin,
+         p, 
+         type = "l",
+         main = "P(X = n)",
+         xlab = "Nombre de succès : n",
+         ylab = "Probabilité : p",
+         xlim = c(0,input$nBin)
+    )
 
   })
 

@@ -10,21 +10,51 @@ library(shiny)
 shinyUI(fluidPage(
 
   # Application title
-  titlePanel("Old Faithful Geyser Data"),
+  titlePanel("Lois de probabilité"),
 
   # Sidebar with a slider input for number of bins
-  sidebarLayout(
-    sidebarPanel(
-      sliderInput("bins",
-                  "Number of bins:",
-                  min = 1,
-                  max = 50,
-                  value = 30)
+  tabsetPanel(
+    tabPanel(
+      "Loi Binomiale",
+        sidebarLayout(
+          sidebarPanel(
+            
+            numericInput("nBin",
+                         "Nombre de tentatives",
+                         min = 1,
+                         value = 20),
+            
+            sliderInput("pBin",
+                        "Probabilté de succès",
+                        min = 0,
+                        max = 1,
+                        value = 0.5)
+          ),
+          
+      
+          # Show a plot of the generated distribution
+          mainPanel(
+            plotOutput("binomPlot",
+                       width = "100%", 
+                       height = "600px"
+            )
+          )
+        )
     ),
-
-    # Show a plot of the generated distribution
-    mainPanel(
-      plotOutput("distPlot")
+    tabPanel(
+      "Loi Normale",
+      sidebarLayout(
+        sidebarPanel(
+          
+          
+        ),
+        
+        
+        # Show a plot of the generated distribution
+        mainPanel(
+          
+        )
+      )
     )
   )
 ))
