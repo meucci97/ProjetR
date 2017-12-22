@@ -16,6 +16,7 @@ shinyUI(fluidPage(
   tabsetPanel(
     tabPanel(
       "Loi Binomiale",
+      br(),
         sidebarLayout(
           sidebarPanel(
             
@@ -28,21 +29,34 @@ shinyUI(fluidPage(
                         "Probabilté de succès",
                         min = 0,
                         max = 1,
-                        value = 0.5)
+                        value = 0.5),
+            numericInput("eBin",
+                         "Echantillon",
+                         min = 1,
+                         value = 50)
           ),
           
       
           # Show a plot of the generated distribution
           mainPanel(
-            plotOutput("binomPlot",
-                       width = "100%", 
-                       height = "600px"
+            tabsetPanel(
+              tabPanel(
+                "Graphique",
+                plotOutput("binomPlot",
+                           width = "100%", 
+                           height = "600px"
+                )
+              ),
+              tabPanel(
+                "Tableau"
+              )
             )
           )
         )
     ),
     tabPanel(
       "Loi Normale",
+      br(),
       sidebarLayout(
         sidebarPanel(
           

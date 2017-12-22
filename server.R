@@ -11,16 +11,20 @@ shinyServer(function(input, output) {
 
   output$binomPlot <- renderPlot({
 
-    p  <- dbinom(0:input$nBin, input$nBin, input$pBin)
+    density  <- dbinom(0:input$nBin, input$nBin, input$pBin)
+    r <- rbinom(0:input$eBin, input$nBbin, input$pBin)
 
     plot(0:input$nBin,
-         p, 
+         density, 
          type = "l",
          main = "P(X = n)",
-         xlab = "Nombre de succès : n",
-         ylab = "Probabilité : p",
+         xlab = "Nombre de succès",
+         ylab = "Fréquence",
          xlim = c(0,input$nBin)
     )
+    
+    hist(r
+         )
 
   })
 
