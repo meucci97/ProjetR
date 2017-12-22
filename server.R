@@ -12,20 +12,28 @@ shinyServer(function(input, output) {
   output$binomPlot <- renderPlot({
 
     density  <- dbinom(0:input$nBin, input$nBin, input$pBin)
-    r <- rbinom(0:input$eBin, input$nBbin, input$pBin)
+    r <- rbinom(input$eBin, input$nBin, input$pBin)
 
-    plot(0:input$nBin,
-         density, 
-         type = "l",
-         main = "P(X = n)",
-         xlab = "Nombre de succès",
-         ylab = "Fréquence",
-         xlim = c(0,input$nBin)
-    )
-    
-    hist(r
+    hist(r, 
+         probability = TRUE, 
+         breaks = c(0:input$nBin),
+         main = paste(
+           "Histogramme d'une loi binomiale de paramètres \n (n,p) = (",
+           input$nBin,",",input$pBin,
+           ") appliquée sur un échantillon de ",input$eBin, " individus"),
+         col = "lightblue"
          )
-
+    lines(0:input$nBin,
+          density, 
+          col = "red",
+          lwd = 2 
+          )
+  })
+  
+  output$binomTab <- renderDataTable({
+    r <- rbinom(input$eBin, input$nBin, input$pBin)
+    tab <- table(Succès = r)
+    data.frame(tab)
   })
 
 })

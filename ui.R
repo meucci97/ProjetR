@@ -30,6 +30,7 @@ shinyUI(fluidPage(
                         min = 0,
                         max = 1,
                         value = 0.5),
+            
             numericInput("eBin",
                          "Echantillon",
                          min = 1,
@@ -48,7 +49,9 @@ shinyUI(fluidPage(
                 )
               ),
               tabPanel(
-                "Tableau"
+                "Tableau",
+                br(),
+                dataTableOutput("binomTab")
               )
             )
           )
