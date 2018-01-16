@@ -62,14 +62,36 @@ shinyUI(fluidPage(
       br(),
       sidebarLayout(
         sidebarPanel(
+          sliderInput("nNorm",
+                       "Nombre d'observation souhaité",
+                      min = 50,
+                      max = 1000,
+                      value = 500),
           
+          numericInput("espNorm",
+                       "Espérance",
+                       min = -1000,
+                       value = 0),
+          
+          numericInput("varNrom",
+                       "Sigma",
+                       min = 0,
+                       value = 1)
           
         ),
         
         
         # Show a plot of the generated distribution
         mainPanel(
-          
+          tabsetPanel(
+            tabPanel(
+              "Graphique",
+              plotOutput("normPlot",
+                         width = "100%", 
+                         height = "600px"
+              )
+            )
+          )
         )
       )
     )

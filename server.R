@@ -32,8 +32,29 @@ shinyServer(function(input, output) {
   
   output$binomTab <- renderDataTable({
     r <- rbinom(input$eBin, input$nBin, input$pBin)
-    tab <- table(Succès = r)
+    tab <- table(Succes = r)
     data.frame(tab)
   })
 
+  
+  
+  output$normPlot <- renderPlot({
+    
+    density  <- rnorm(0:input$nNorm, input$espNorm, input$varNrom)
+    r <- rnorm(0:input$nNorm, input$espNorm, input$varNrom)
+    
+    hist(density, 
+         probability = TRUE, 
+         main = paste(
+           "Histogramme d'une loi normale de paramètres \n (µ, σ) = (",
+           input$espNorm,",",input$varNrom,
+           ") appliquée sur un nombre d'observation souhaité de ",input$nNorm, " "),
+         col = "lightblue"
+    )
+    lines(0:input$nNorm,
+          r, 
+          col = "red",
+          lwd = 1
+    )
+  })
 })
