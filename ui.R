@@ -68,15 +68,17 @@ shinyUI(fluidPage(
                       max = 1000,
                       value = 500),
           
-          numericInput("espNorm",
-                       "Espérance",
-                       min = -1000,
-                       value = 0),
+          sliderInput("espNorm",
+                      "Espérance",
+                      min = 0,
+                      max = 100,
+                      value = 2),
           
-          numericInput("varNrom",
-                       "Sigma",
-                       min = 0,
-                       value = 1)
+          sliderInput("varNrom",
+                      "Ecart Type",
+                      min = 0,
+                      max = 100,
+                      value = 2)
           
         ),
         

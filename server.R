@@ -40,21 +40,21 @@ shinyServer(function(input, output) {
   
   output$normPlot <- renderPlot({
     
-    density  <- rnorm(0:input$nNorm, input$espNorm, input$varNrom)
+    density  <- dnorm(-input$nNorm:input$nNorm, input$espNorm, input$varNrom)
     r <- rnorm(0:input$nNorm, input$espNorm, input$varNrom)
     
-    hist(density, 
+    hist(r, 
          probability = TRUE, 
          main = paste(
            "Histogramme d'une loi normale de paramètres \n (µ, σ) = (",
            input$espNorm,",",input$varNrom,
-           ") appliquée sur un nombre d'observation souhaité de ",input$nNorm, " "),
+           ") appliquée sur un nombre d'observation de ",input$nNorm, " "),
          col = "lightblue"
     )
-    lines(0:input$nNorm,
-          r, 
+    lines(-input$nNorm:input$nNorm,
+          density, 
           col = "red",
-          lwd = 1
+          lwd = 2
     )
   })
 })
