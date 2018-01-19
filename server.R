@@ -9,7 +9,6 @@ library(shiny)
 
 shinyServer(function(input, output) {
   
-  B <- 1
   N <- 1 
 
   observeEvent(input$exportB, {
@@ -47,8 +46,7 @@ shinyServer(function(input, output) {
 
     density  <- dbinom(0:input$nBin, input$nBin, input$pBin)
     r <- rbinom(input$eBin, input$nBin, input$pBin)
-    B <<- r
-
+    
     hist(r, 
          probability = TRUE, 
          breaks = c(0:input$nBin),
@@ -66,7 +64,7 @@ shinyServer(function(input, output) {
   })
   
   output$binomTab <- renderDataTable({
-    #r <<- rbinom(input$eBin, input$nBin, input$pBin)
+    B <<- rbinom(input$eBin, input$nBin, input$pBin)
     tab <- table(Succes = B)
     data.frame(tab)
   })

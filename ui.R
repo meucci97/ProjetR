@@ -34,9 +34,7 @@ shinyUI(fluidPage(
             numericInput("eBin",
                          "Echantillon",
                          min = 1,
-                         value = 50),
-            actionButton("exportB", "Exporter données"),
-            textOutput("exportB")
+                         value = 50)
           ),
           
       
@@ -53,7 +51,11 @@ shinyUI(fluidPage(
               tabPanel(
                 "Tableau",
                 br(),
-                dataTableOutput("binomTab")
+                dataTableOutput("binomTab"),
+                
+                actionButton("exportB", "Exporter données"),
+                br(),
+                textOutput("exportB")
               )
             )
           )
