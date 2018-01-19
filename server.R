@@ -8,11 +8,46 @@
 library(shiny)
 
 shinyServer(function(input, output) {
+  
+  B <- 1
+  N <- 1 
+
+  observeEvent(input$exportB, {
+    tab <- table(Succes = B)
+    data <- data.frame(t(tab))
+    write.table(
+      x = data, 
+      file = "./loi_binomiale.txt",
+      append = FALSE, 
+      sep = " ", 
+      dec = ".",
+      row.names = TRUE, 
+      col.names = NA
+      )
+    output$exportB <- renderText({ 
+      "Export terminé !"
+    })
+  })
+  
+  observeEvent(input$exportN, {
+    tab <- table(Succes = N)
+    data <- data.frame(t(tab))
+    write.table(
+      x = data, 
+      file = "./loi_normale.txt",
+      append = FALSE, 
+      sep = " ", 
+      dec = ".",
+      row.names = TRUE, 
+      col.names = NA
+    )
+  })
 
   output$binomPlot <- renderPlot({
 
     density  <- dbinom(0:input$nBin, input$nBin, input$pBin)
     r <- rbinom(input$eBin, input$nBin, input$pBin)
+    B <<- r
 
     hist(r, 
          probability = TRUE, 
@@ -31,8 +66,8 @@ shinyServer(function(input, output) {
   })
   
   output$binomTab <- renderDataTable({
-    r <- rbinom(input$eBin, input$nBin, input$pBin)
-    tab <- table(Succes = r)
+    #r <<- rbinom(input$eBin, input$nBin, input$pBin)
+    tab <- table(Succes = B)
     data.frame(tab)
   })
 
@@ -42,6 +77,7 @@ shinyServer(function(input, output) {
     
     density  <- dnorm(-input$nNorm:input$nNorm, input$espNorm, input$varNrom)
     r <- rnorm(0:input$nNorm, input$espNorm, input$varNrom)
+    N <<- r
     
     hist(r, 
          probability = TRUE, 

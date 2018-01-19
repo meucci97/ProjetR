@@ -34,7 +34,9 @@ shinyUI(fluidPage(
             numericInput("eBin",
                          "Echantillon",
                          min = 1,
-                         value = 50)
+                         value = 50),
+            actionButton("exportB", "Exporter données"),
+            textOutput("exportB")
           ),
           
       
@@ -78,7 +80,8 @@ shinyUI(fluidPage(
                       "Ecart Type",
                       min = 0,
                       max = 100,
-                      value = 2)
+                      value = 2),
+          actionButton("exportN", "Exporter données")
           
         ),
         
